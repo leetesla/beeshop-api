@@ -5,7 +5,7 @@ import (
 )
 
 type Product struct {
-	ProductId            int       `xorm:"not null pk autoincr INT(11)"`
+	ProductId            int       `json:"product_id" xorm:"not null pk autoincr INT(11)"`
 	Type                 int       `xorm:"not null default 0 comment('商品类型：0普通商品，5云伴分销商品') TINYINT(3)"`
 	Model                string    `xorm:"not null VARCHAR(64)"`
 	Upc                  string    `xorm:"not null VARCHAR(20)"`
@@ -44,4 +44,14 @@ type Product struct {
 	GroupId              int       `xorm:"not null default 0 comment('属于哪个group组') INT(32)"`
 	CreatedAt            int       `xorm:"not null INT(11)"`
 	UpdatedAt            int       `xorm:"not null INT(11)"`
+}
+
+func (p Product) TableName() string {
+	return "product"
+	//if u.Role == "admin" {
+	//	return "admin_users"
+	//} else {
+	//	return "users"
+	//}
+	// return "profiles"
 }
